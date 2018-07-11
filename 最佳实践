@@ -1,0 +1,70 @@
+1.由于JavaScript自身的特点，以及它在传递值和引用时的不同处理方式，通常认为，在视图中通过对象的属性而非对象本身来进行引用绑定，是Angular中的最佳实践。
+<body ng-app="">
+<div ng-controller="myCtrl">
+    <p><input type="text" placeholder="name" ng-model="person.name"></p>
+    <h1>{{person.name}}</h1>
+    {{clock}}
+
+</div>
+</body>
+
+<script src="js/angular.js"></script>
+
+<script type="text/javascript">
+function myCtrl($scope,$timeout) {
+
+
+    var updateClock = function(){
+        $scope.clock = new Date();
+        $timeout(function(){
+            updateClock();
+        },1000);
+        //console.log($scope.clock);
+    }
+
+    updateClock();
+}
+</script>
+
+<body ng-app>
+
+<div ng-controller="myCtrl">
+    <p class="ng-cloak"><input type="text" placeholder="name" ng-model="person.name"></p>
+    <h1 class="ng-cloak">{{person.name}}</h1>
+    <h2 class="ng-cloak">{{clock.now}}</h2>
+</div>
+
+</body>
+
+<script src="js/angular.js"></script>
+
+<script type="text/javascript">
+function myCtrl($scope) {
+
+    $scope.clock = {
+        now:new Date()
+    }
+    var updateClock = function(){
+        $scope.clock.now = new Date();
+    }
+    setInterval(function(){
+        $scope.$apply(updateClock);
+    },1000);
+    updateClock();
+    
+}
+</script>
+
+2.$scope对象的生命周期处理有四个不同阶段
+
+1.创建
+在创建控制器或指令时，AngularJS会用$injector创建一个新的作用域，并在这个新建的控制器或指令运行时将作用域传递进去。
+2.链接
+当Angular开始运行时，所有的$scope对象都会附加或者链接到视图中。所有创建$scope对象的函数也会将自身附加到视图中。这些作用域将会注册当Angular应用上下文中发生变化时需
+要运行的函数。这些函数被称为$watch函数，Angular通过这些函数获知何时启动事件循环。
+3.更新
+当事件循环运行时，它通常执行在顶层$scope对象上（被称作$rootScope），每个子作用域都执行自己的脏值检测。每个监控函数都会检查变化。如果检测到任意变化，$scope对象就会触
+发指定的回调函数。
+4.销毁
+当一个$scope在视图中不再需要时，这个作用域将会清理和销毁自己。尽管永远不会需要清理作用域（因为Angular会为你处理），但是知道是谁创建了这个作用域还是有用的，因为你可以
+使用这个$scope上叫做$destory()的方法来清理这个作用域。
