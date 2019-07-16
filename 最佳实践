@@ -1,4 +1,4 @@
-1.由于JavaScript自身的特点，以及它在传递值和引用时的不同处理方式，通常认为，在视图中通过对象的属性而非对象本身来进行引用绑定，是Angular中的最佳实践。
+﻿1.由于JavaScript自身的特点，以及它在传递值和引用时的不同处理方式，通常认为，在视图中通过对象的属性而非对象本身来进行引用绑定，是Angular中的最佳实践。
 <body ng-app="">
 <div ng-controller="myCtrl">
     <p><input type="text" placeholder="name" ng-model="person.name"></p>
@@ -68,3 +68,7 @@ function myCtrl($scope) {
 4.销毁
 当一个$scope在视图中不再需要时，这个作用域将会清理和销毁自己。尽管永远不会需要清理作用域（因为Angular会为你处理），但是知道是谁创建了这个作用域还是有用的，因为你可以
 使用这个$scope上叫做$destory()的方法来清理这个作用域。
+
+环境搭建 下载phpStudy 部署项目
+用户名 admin 密码 123456
+
