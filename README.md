@@ -20,3 +20,5 @@ AngularJS开发环境
 依赖管理工具---bower
 单元测试工具---Karma+jasmine
 集成测试工具---Protractor
+
+https://github.com/HY0606/angular-web
