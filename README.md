@@ -22,3 +22,4 @@ AngularJS开发环境
 集成测试工具---Protractor
 
 https://github.com/HY0606/angular-web
+https://www.cnblogs.com/clark159/p/4706319.html
